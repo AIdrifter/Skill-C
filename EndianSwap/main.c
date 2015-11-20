@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <byteswap.h>
 
-#define ECC_P256_INTEGER_SIZE_IN_DIGITS 8
+#define BIG_NUMBER__SIZE 8
 
 inline void endian_swap_char(unsigned short int *x)
 {
@@ -18,19 +18,19 @@ inline void endian_swap(unsigned int *x)
     (*x<<24);
 }
 
-unsigned int ConstB[ ECC_P256_INTEGER_SIZE_IN_DIGITS ] =
+unsigned int ConstB[ BIG_NUMBER__SIZE ] =
 {
     0x29c4bddf, 0xd89cdf62, 0x78843090, 0xacf005cd,
     0xf7212ed6, 0xe5a220ab, 0x04874834, 0xdc30061d
 };
 
-unsigned int ConstA[ ECC_P256_INTEGER_SIZE_IN_DIGITS ] =
+unsigned int ConstA[ BIG_NUMBER__SIZE ] =
 {
     0xfffffffc, 0xffffffff, 0xffffffff, 0x00000003,
     0x00000000, 0x00000000, 0x00000004, 0xfffffffc
 };
 
-unsigned int P256[ ECC_P256_INTEGER_SIZE_IN_DIGITS ] =
+unsigned int P256[ BIG_NUMBER__SIZE ] =
 {
     0xffffffff, 0xffffffff, 0xffffffff, 0x00000000,
     0x00000000, 0x00000000, 0x00000001, 0xffffffff
