@@ -2,7 +2,11 @@
 #include <stdlib.h>
 #include <byteswap.h>
 
+<<<<<<< HEAD
 #define BIG_NUMBER__SIZE 8
+=======
+#define ECC_P256_INTEGER_SIZE_IN_DIGITS 8
+>>>>>>> d8b41592f95654584b91d9fc532c81de29b4d424
 
 inline void endian_swap_char(unsigned short int *x)
 {
@@ -18,19 +22,31 @@ inline void endian_swap(unsigned int *x)
     (*x<<24);
 }
 
+<<<<<<< HEAD
 unsigned int ConstB[ BIG_NUMBER__SIZE ] =
+=======
+unsigned int ConstB[ ECC_P256_INTEGER_SIZE_IN_DIGITS ] =
+>>>>>>> d8b41592f95654584b91d9fc532c81de29b4d424
 {
     0x29c4bddf, 0xd89cdf62, 0x78843090, 0xacf005cd,
     0xf7212ed6, 0xe5a220ab, 0x04874834, 0xdc30061d
 };
 
+<<<<<<< HEAD
 unsigned int ConstA[ BIG_NUMBER__SIZE ] =
+=======
+unsigned int ConstA[ ECC_P256_INTEGER_SIZE_IN_DIGITS ] =
+>>>>>>> d8b41592f95654584b91d9fc532c81de29b4d424
 {
     0xfffffffc, 0xffffffff, 0xffffffff, 0x00000003,
     0x00000000, 0x00000000, 0x00000004, 0xfffffffc
 };
 
+<<<<<<< HEAD
 unsigned int P256[ BIG_NUMBER__SIZE ] =
+=======
+unsigned int P256[ ECC_P256_INTEGER_SIZE_IN_DIGITS ] =
+>>>>>>> d8b41592f95654584b91d9fc532c81de29b4d424
 {
     0xffffffff, 0xffffffff, 0xffffffff, 0x00000000,
     0x00000000, 0x00000000, 0x00000001, 0xffffffff
