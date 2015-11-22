@@ -183,7 +183,10 @@ int system(const char * cmdstring)
 int main(){
     int ret=3;
     printf("before ret = %d\n ",ret);
-    ret=system("./Hello");
+    int i;
+    while(i++<9999999){
+        ret=system("./Hello");
+    }
     printf("after ret = %d\n ",ret);
     return 0;
 }
