@@ -2,11 +2,7 @@
 #include <stdlib.h>
 #include <byteswap.h>
 
-<<<<<<< HEAD
 #define BIG_NUMBER__SIZE 8
-=======
-#define ECC_P256_INTEGER_SIZE_IN_DIGITS 8
->>>>>>> d8b41592f95654584b91d9fc532c81de29b4d424
 
 inline void endian_swap_char(unsigned short int *x)
 {
@@ -22,31 +18,19 @@ inline void endian_swap(unsigned int *x)
     (*x<<24);
 }
 
-<<<<<<< HEAD
 unsigned int ConstB[ BIG_NUMBER__SIZE ] =
-=======
-unsigned int ConstB[ ECC_P256_INTEGER_SIZE_IN_DIGITS ] =
->>>>>>> d8b41592f95654584b91d9fc532c81de29b4d424
 {
     0x29c4bddf, 0xd89cdf62, 0x78843090, 0xacf005cd,
     0xf7212ed6, 0xe5a220ab, 0x04874834, 0xdc30061d
 };
 
-<<<<<<< HEAD
 unsigned int ConstA[ BIG_NUMBER__SIZE ] =
-=======
-unsigned int ConstA[ ECC_P256_INTEGER_SIZE_IN_DIGITS ] =
->>>>>>> d8b41592f95654584b91d9fc532c81de29b4d424
 {
     0xfffffffc, 0xffffffff, 0xffffffff, 0x00000003,
     0x00000000, 0x00000000, 0x00000004, 0xfffffffc
 };
 
-<<<<<<< HEAD
 unsigned int P256[ BIG_NUMBER__SIZE ] =
-=======
-unsigned int P256[ ECC_P256_INTEGER_SIZE_IN_DIGITS ] =
->>>>>>> d8b41592f95654584b91d9fc532c81de29b4d424
 {
     0xffffffff, 0xffffffff, 0xffffffff, 0x00000000,
     0x00000000, 0x00000000, 0x00000001, 0xffffffff
@@ -98,22 +82,97 @@ int reverseInt(unsigned int *str,unsigned int length){
 
 
 
+int P1_x[]={
+    0x4eebc127,
+    0xffac3f90,
+    0x087d81fb,
+    0xb027f84a,
+    0x87cbbc98,
+    0x66ad77dd,
+    0xb6ff747e,
+    0x26936a3f
+};
+
+
+int P1_y[]={
+    0xc983a7eb,
+    0xb04c5c1f,
+    0x0861fe1a,
+    0x583e47ad,
+    0x1a2ee98e,
+    0x78820831,
+    0xe587cc07,
+    0xd5f06a29
+};
+
+int R_x[]={
+    0x3e77664a,
+    0x40394737,
+    0x346cee3e,
+    0x55ae744f,
+    0x5b17a3ad,
+    0xd50a961a,
+    0x54213673,
+    0x13074b59
+};
+int R_y[]={
+    0xd377e44b,
+    0x93d36220,
+    0xadff14b5,
+    0x299c2b53,
+    0xef639f11,
+    0xf424d44c,
+    0x4a07f75f,
+    0xa4c9916d
+};
+
+int t2[]={
+0x02fce030,0x1b59facc,0xddb32487,0xc1ce4135,0xe0f6d28e,0x396cb92d,0x53ce08b7,0x178ca44a};
+
+int y11[]={
+0x017e7018,0x8dacfd66,0xeed99243,0x60e7209a,0xf07b6947,0x9cb65c96,0x29e7045b,0x0bc65225};
+
+int p1_x[]=
+{
+    0x26936a3f,0xb6ff747e,0x66ad77dd,0x87cbbc98,0xb027f84a,0x087d81fb,0xffac3f90,0x4eebc127
+};
+int p1_y[]=
+{
+    0xd5f06a29,0xe587cc07,0x78820831,0x1a2ee98e,0x583e47ad,0x0861fe1a,0xb04c5c1f,0xc983a7eb
+};
+
+
+int G_x[]=
+{
+    0x18905f76,0xa53755c6,0x79fb732b,0x77622510,0x75ba95fc,0x5fedb601,0x79e730d4,0x18a9143c
+};
+
+int G_y[]=
+{
+    0x8571ff18,0x25885d85,0xd2e88688,0xdd21f325,0x8b4ab8e4,0xba19e45c,0xddf25357,0xce95560a
+};
+
+
+
 void reverse_to_MS32(char *name,int *str,int length){
     int i;
     printf("%s\n",name);
     for(i=0;i<length;i++)
         printf("%08x ",str[i]);
 
-    for(i=0;i<length;i++)
-        endian_swap(&str[i]);
+//    for(i=0;i<length;i++)
+//        endian_swap(&str[i]);
 
-    puts("");
-    for(i=0;i<length;i++)
-        printf("%08x ",str[i]);
+//    puts("");
+//    for(i=0;i<length;i++)
+//        printf("%08x ",str[i]);
 
     puts("");
     reverseInt(str,length);
-
+     for(i=0;i<length;i++)
+        printf("%08x ",str[i]);
+//
+    puts("");
     for(i=0;i<length;i++)
         printf("%08x",str[i]);
     puts("");
@@ -131,4 +190,16 @@ int main(){
     reverse_to_MS32("[C2_y]",C1_y,8);
     reverse_to_MS32("[K]",k,8);
     reverse_to_MS32("[Result]",result,16);
+    reverse_to_MS32("P1x",P1_x,8);
+    reverse_to_MS32("P1y",P1_y,8);
+    reverse_to_MS32("R1x",R_x,8);
+    reverse_to_MS32("t2",t2,8);
+    reverse_to_MS32("y11",y11,8);
+    reverse_to_MS32("p1_x",p1_x,8);
+    reverse_to_MS32("p1_y",p1_y,8);
+    reverse_to_MS32("G_x",G_x,8);
+    reverse_to_MS32("G_y",G_y,8);
+
+
+
 }
