@@ -81,6 +81,8 @@ int reverseInt(unsigned int *str,unsigned int length){
 }
 
 
+int P3_x[]={0x70eca9db,0x1cb230c1,0x1007dc28,0x415d8d89,0x42c85a52,0x197332f2,0x3adb60e9,0x3e159550};
+int P3_y[]={0x03b0cc0a,0x6e1ab418,0x92a7a937,0xcbd61eb7,0x196b53f9,0x53aa2db3,0xd957b012,0x9c976966};
 
 int P1_x[]={
     0x4eebc127,
@@ -200,6 +202,8 @@ int main(){
     reverse_to_MS32("G_x",G_x,8);
     reverse_to_MS32("G_y",G_y,8);
 
+    reverse_to_MS32("P3_x",P3_x,8);
+    reverse_to_MS32("P3_y",P3_y,8);
 
 
 }

@@ -1,0 +1,9 @@
+
+a.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <a>:
+   0:	bf 00 00 00 00       	mov    $0x0,%edi
+   5:	e9 00 00 00 00       	jmpq   a <a+0xa>

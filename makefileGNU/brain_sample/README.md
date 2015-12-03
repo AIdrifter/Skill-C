@@ -14,3 +14,37 @@ gcc op.c -o op.s2 -O3 -S
 # -L : 指定 library path(.o) :
 和 -I 類似，只是這裡指定的是 library 的路徑，和 VC  中的 Additional Library Directories 類似。
 -Dname : 預定義 macro :   和 VC 的 Preprocessor Definitions 相同。這個範例可以使用 $ gcc main.c op.c -o -DTEST test ，會多印出 Program End 的文字。
+
+
+
+# Parameter
+-E -- 只進行前處理，不進行編譯，結果由 console 直接輸出
+-C -- 進行前處理時保留註解
+-S -- 產生組合語言程式碼 (.s)
+-c -- 只編譯不進行連結 (產生 .o 檔)
+-I -- 指定 INCLUDE PATH
+-L -- 指定 LIBRARY PATH
+-llibrary -- 指定要連結的函式庫
+-Dname -- 定義 macro，同 #define
+-Uname -- 解除 macro 定義，同 #undef
+
+# Linking
+-static -- 只使用靜態函式庫
+-share -- 儘量使用共享函式庫
+-shared-libgcc -- 指定連結共享的 libgcc
+-static-libgcc -- 指定連結靜態的 libgcc
+-nostartfiles -- 不使用 standard system startup files (常用於 cross-compiling 時)
+-nodefaultlibs -- 不使用系統預設的標準函式庫
+-nostdlib -- 不使用標準函式庫及 startup files
+-nostdinc++ -- 不使用 c++ 標準的 #include 檔
+-fPIC -- 產生 position-independent code，常用於共享函式庫的產生
+-Wl,option -- 將 option 傳給 linker，如果有多個 option ，使用逗號(,)隔開。e.g.
+$ gcc -shared -o myshared -Wl,--whole-archive -llib1 -llib2 -Wl,--no-whole-archive  a.o b.o c.o
+
+# Debugging and profiling
+-g -- 產生 debugging 時所需要的資訊及 symbol table
+-p -- 產生 prof 所需要的資訊
+-pg -- 產生 gprof 所需要的資訊
+
+http://www.cmlab.csie.ntu.edu.tw/~daniel/linux/gcc.html
+http://jayextmemo.blogspot.tw/2015/01/linux-gcc-makefile.html
