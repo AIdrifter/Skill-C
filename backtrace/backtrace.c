@@ -1,3 +1,4 @@
+#include "./debug/debug.h"
 #include <stdio.h>
 #include <execinfo.h>
 #include <signal.h>
@@ -29,6 +30,8 @@ void foo() { bar(); }
 
 
 int main(int argc, char **argv) {
+  DEBUG_PRINT(0," error hello world\n");
+  DEBUG_PRINT(1," warnning \n");
   signal(SIGSEGV, handler);   // install our handler
   foo(); // this will call foo, bar, and baz.  baz segfaults.
 }
