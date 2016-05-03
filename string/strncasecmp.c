@@ -16,13 +16,16 @@ int main(){
     printf("%d %s =%s\n",strncasecmp(a, d, 3), a, b);
     printf("%d %s =%s\n",strncasecmp(a, e, 3), a, b);
 
-
     /*
      *  0  DeF =dEf
      *  3  DeF =dEf
      *  3  DeF =dEf
      * -3  DeF =dEf
-     * /
+     */
+    
+    bool bValue=true;
+    printf("Value = %d \n",bValue);
+    printf("%s\n",bValue ? "true" : "false");
 
 }
 

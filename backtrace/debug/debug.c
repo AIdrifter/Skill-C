@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
+
 // Do not modify
 #define NONE "\033[m"
 #define RED "\033[0;32;31m"
@@ -29,22 +30,55 @@
 static int syslog=5;
 static char *dump_description ="[DUMP]";
 
-void DEBUG_PRINT(unsigned int level,char *fmt,...){
-    va_list args;
-    va_start(args, fmt);
-
+void dbghdrclass(unsigned int level, const int codeline, const char *func)
+{
     // we define important error message for level 0
     if(level ==0){
         printf(RED TAG_NAME);
-        vfprintf(stdout, fmt, args);
-        printf(NONE);
+        printf("[%s]....@%d",func,codeline);
+        printf(LIGHT_GREEN TAG_NAME);
     }
     else if(level < syslog){
         printf(LIGHT_GREEN TAG_NAME);
-        vfprintf(stdout, fmt, args);
+        printf("[%s]....@%d",func,codeline);
         printf(NONE);
     }
 }
+
+static inline void __dbgtext_va(const char *format_str, va_list ap) PRINTF_ATTRIBUTE(1,0);
+static inline void __dbgtext_va(const char *format_str, va_list ap)
+{
+      char *msgbuf = NULL;
+      bool ret = true;
+      int res;
+
+      res = vasprintf(&msgbuf, format_str, ap);
+      if (res != -1) {
+          format_debug_text(msgbuf);
+      } else {
+          ret = false;
+      }
+      SAFE_FREE(msgbuf);
+      return ret;
+  }
+
+void dbgtext_va(const char *format_str, va_list ap)
+{
+    return __dbgtext_va(format_str, ap);
+}
+
+void dbgtext(const char *format_str, ... )
+{
+    va_list ap;
+    bool ret;
+
+    va_start(ap, format_str);
+    ret = __dbgtext_va(format_str, ap);
+    va_end(ap);
+
+    return ret;
+}
+
 
 void DUMP_DATA(char *description, void *buffer, unsigned int len, dump_type type )
 {
