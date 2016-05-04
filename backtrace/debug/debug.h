@@ -18,10 +18,10 @@ typedef enum{
 void DEBUG_PRINT(unsigned int level,char *fmt,...);
 void DUMP_DATA(char *description, void *buffer, unsigned int len, dump_type type );
 
-void dbgtext_va(const char *, va_list ap) ;
-void dbgtext( const char *, ... ) ;
-void dbghdrclass( int level, int codeline, const char *func);
-void dbghdr( int level, const char *location, const char *func);
+bool dbgtext_va(const char *, va_list ap) ;
+bool dbgtext( const char *, ... ) ;
+//bool dbghdrclass( const unsigned int level, const unsigned int codeline, const char *func);
+bool dbghdr( int level, const char *location, const char *func);
 
 
 /*

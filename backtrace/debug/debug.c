@@ -30,23 +30,22 @@
 static int syslog=5;
 static char *dump_description ="[DUMP]";
 
-void dbghdrclass(unsigned int level, const int codeline, const char *func)
+bool dbghdrclass(const unsigned int level, const int codeline, const char *func)
 {
     // we define important error message for level 0
     if(level ==0){
         printf(RED TAG_NAME);
         printf("[%s]....@%d",func,codeline);
-        printf(LIGHT_GREEN TAG_NAME);
     }
     else if(level < syslog){
         printf(LIGHT_GREEN TAG_NAME);
         printf("[%s]....@%d",func,codeline);
-        printf(NONE);
     }
+    return true;
 }
 
-static inline void __dbgtext_va(const char *format_str, va_list ap) PRINTF_ATTRIBUTE(1,0);
-static inline void __dbgtext_va(const char *format_str, va_list ap)
+//static inline bool __dbgtext_va(const char *format_str, va_list ap) PRINTF_ATTRIBUTE(1,0);
+static inline bool __dbgtext_va(const char *format_str, va_list ap)
 {
       char *msgbuf = NULL;
       bool ret = true;
@@ -54,29 +53,27 @@ static inline void __dbgtext_va(const char *format_str, va_list ap)
 
       res = vasprintf(&msgbuf, format_str, ap);
       if (res != -1) {
-          format_debug_text(msgbuf);
+          puts(msgbuf);
       } else {
           ret = false;
       }
-      SAFE_FREE(msgbuf);
+      free(msgbuf);
+      printf(NONE"\n");
       return ret;
   }
 
-void dbgtext_va(const char *format_str, va_list ap)
+bool  dbgtext_va(const char *format_str, va_list ap)
 {
     return __dbgtext_va(format_str, ap);
 }
 
-void dbgtext(const char *format_str, ... )
+bool dbgtext(const char *format_str, ... )
 {
     va_list ap;
     bool ret;
-
     va_start(ap, format_str);
-    ret = __dbgtext_va(format_str, ap);
+    return __dbgtext_va(format_str, ap);
     va_end(ap);
-
-    return ret;
 }
 
 
@@ -112,4 +109,5 @@ void DUMP_DATA(char *description, void *buffer, unsigned int len, dump_type type
         printf("%02x%c", (char*)dump_ptr[i],(i%17==16 || i == len-1 )?'\n':' ');
     }
     printf(NONE);
+    printf("\n");
 }

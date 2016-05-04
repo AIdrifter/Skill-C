@@ -1,5 +1,5 @@
-all:backtrace_test
-backtrace_test: backtrace debug.o
+all:test_backtrace
+test_backtrace: backtrace debug.o
 	#gcc -g -rdynamic ./test.c -o test
 	gcc -o backtrace_test backtrace debug.o
 

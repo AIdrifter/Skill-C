@@ -29,9 +29,20 @@ void bar() { baz(); }
 void foo() { bar(); }
 
 
-int main(int argc, char **argv) {
-  DEBUG_PRINT(0," error hello world\n");
-  DEBUG_PRINT(1," warnning \n");
+int main(int argc, char **argv)
+{
+  int test_level=11;
+  int array[]={[10]=0,[10]=1,[99]=3};
+
+  // error message test
+  DEBUG_PRINT(0,(" error hello world %d \n",test_level));
+
+  // warnning message test
+  DEBUG_PRINT(1,(" warnning Message  %d \n",++test_level));
+
+  // array dump
+  DUMP_DATA("test_dump",array,sizeof(array),int32_type);
+
   signal(SIGSEGV, handler);   // install our handler
   foo(); // this will call foo, bar, and baz.  baz segfaults.
 }
