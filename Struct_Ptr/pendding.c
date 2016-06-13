@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 // 32 bit machine
-
+// C memory address + 1 = one byte
 
 // total 12 byes
 typedef struct aligen_test12{
@@ -58,6 +58,6 @@ int main(){
     printf("Aligen struct size = %ld \n",sizeof(AligenPack));
     printf("x =%p sizeof : %ld\n",&AligenPack.x,sizeof(AligenPack.x));
     printf("y =%p sizeof : %ld\n",&AligenPack.y,sizeof(AligenPack.y));
-    printf("z =%p sizeof : %ld\n",&Aligen8.z,sizeof(Aligen8.z));
+    printf("z =%p sizeof : %ld\n",&AligenPack.z,sizeof(AligenPack.z));
 
 }
