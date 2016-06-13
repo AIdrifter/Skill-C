@@ -9,14 +9,14 @@ struct funcptrs{
 
 struct context{
     struct funcptrs fps;
-}; 
+};
 
 void func1 (void) { printf( "1\n" ); }
 void func0 (struct context *ctx) { printf( "0\n" ); }
 
 void getContext(struct context *con){
-    con->fps.func0 = func0;  
-    con->fps.func1 = func1;  
+    con->fps.func0 = func0;
+    con->fps.func1 = func1;
 }
 
 int main(int argc, char *argv[]){
