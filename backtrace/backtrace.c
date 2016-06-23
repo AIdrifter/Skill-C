@@ -31,6 +31,7 @@ void foo() { bar(); }
 
 int main(int argc, char **argv)
 {
+  int dr=0;
   int test_level=11;
   int array[]={[10]=0,[10]=1,[99]=3};
 
@@ -43,8 +44,20 @@ int main(int argc, char **argv)
   // array dump
   DUMP_DATA("test_dump",array,sizeof(array),int32_type);
 
+
+  ChkBOOL(1,3);
+  printf("after first check\n");
+  ChkBOOL(0,4);
+  printf("after second check\n");
+
   signal(SIGSEGV, handler);   // install our handler
   foo(); // this will call foo, bar, and baz.  baz segfaults.
+
+
+ErrorExit:
+  printf("END\n");
+
+  return dr;
 }
 
 
