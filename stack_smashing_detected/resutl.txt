@@ -1,0 +1,45 @@
+
+starblue:
+It means that you wrote to some variables on the stack in an illegal way,
+most likely as the result of a Buffer overflow.
+
+
+Stack overflow is the stack smashing into something else. Here it is the other way around: something has smashed into the stack. – Peter Mortensen Aug 28 '09 at 9:27
+5
+
+Not really. It's one part of the stack smashing into another part. So it really is a buffer overflow, just not over the top of stack, but "only" into another part of the stack. – Bas Wijnen Nov 30 '12 at 7:48
+
+
+*** stack smashing detected ***: ./a.out terminated
+======= Backtrace: =========
+/lib/tls/i686/cmov/libc.so.6(__fortify_fail+0x48)[0xce0ed8]
+/lib/tls/i686/cmov/libc.so.6(__fortify_fail+0x0)[0xce0e90]
+./a.out[0x8048524]
+./a.out[0x8048545]
+/lib/tls/i686/cmov/libc.so.6(__libc_start_main+0xe6)[0xc16b56]
+./a.out[0x8048411]
+
+
+
+======= Memory map: ========
+007d9000-007f5000 r-xp 00000000 08:06 5776       /lib/libgcc_s.so.1
+007f5000-007f6000 r--p 0001b000 08:06 5776       /lib/libgcc_s.so.1
+007f6000-007f7000 rw-p 0001c000 08:06 5776       /lib/libgcc_s.so.1
+0090a000-0090b000 r-xp 00000000 00:00 0          [vdso]
+00c00000-00d3e000 r-xp 00000000 08:06 1183       /lib/tls/i686/cmov/libc-2.10.1.so
+00d3e000-00d3f000 ---p 0013e000 08:06 1183       /lib/tls/i686/cmov/libc-2.10.1.so
+00d3f000-00d41000 r--p 0013e000 08:06 1183       /lib/tls/i686/cmov/libc-2.10.1.so
+00d41000-00d42000 rw-p 00140000 08:06 1183       /lib/tls/i686/cmov/libc-2.10.1.so
+00d42000-00d45000 rw-p 00000000 00:00 0
+00e0c000-00e27000 r-xp 00000000 08:06 4213       /lib/ld-2.10.1.so
+00e27000-00e28000 r--p 0001a000 08:06 4213       /lib/ld-2.10.1.so
+00e28000-00e29000 rw-p 0001b000 08:06 4213       /lib/ld-2.10.1.so
+08048000-08049000 r-xp 00000000 08:05 1056811    /dos/hacking/test/a.out
+08049000-0804a000 r--p 00000000 08:05 1056811    /dos/hacking/test/a.out
+0804a000-0804b000 rw-p 00001000 08:05 1056811    /dos/hacking/test/a.out
+08675000-08696000 rw-p 00000000 00:00 0          [heap]
+b76fe000-b76ff000 rw-p 00000000 00:00 0
+b7717000-b7719000 rw-p 00000000 00:00 0
+bfc1c000-bfc31000 rw-p 00000000 00:00 0          [stack]
+Aborted
+
