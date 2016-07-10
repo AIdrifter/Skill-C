@@ -207,6 +207,8 @@ nnoremap <Leader>s :call ToggleErrors()<cr>
 "
 " 5.cscope setting 
 "
+cs add $CSCOPE_DB
+
 " [S] Find this C symbol
 nmap cs :cs find s
 
