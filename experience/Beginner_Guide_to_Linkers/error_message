@@ -1,0 +1,4 @@
+g++ -o test1 test1a.o test1b.o
+test1a.o(.text+0x18): In function `main':
+: undefined reference to `findmax(int, int)'
+collect2: ld returned 1 exit status

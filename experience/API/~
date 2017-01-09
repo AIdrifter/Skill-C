@@ -1,0 +1,7 @@
+struct person
+{
+    char name[255];
+    int age;
+};
+
+set_person(void *ptr,)

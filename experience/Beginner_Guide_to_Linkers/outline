@@ -1,0 +1,22 @@
+naming of Parts: What's in a C File
+    What The C Compiler Does
+        Dissecting An Object File
+    What The Linker Does: Part 1
+        Duplicate Symbols
+    What The Operating System Does
+    What The Linker Does: Part 2
+        Static Libraries
+        Shared Libraries
+        Windows DLLs
+            Exporting Symbols
+            .LIB and Other Library-Related Files
+            Importing Symbols
+            Circular Dependencies
+    Adding C++ To The Picture
+        Function Overloading & Name Mangling
+        Initialization of Statics
+        Templates
+    Dynamically Loaded Libraries
+        Interaction with C++ Features
+    More Details
+
