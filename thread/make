@@ -1,1 +1,0 @@
-gcc -pthread -g -o race_condition race_condition.c
