@@ -13,16 +13,6 @@ size_t g_log_level;
 // init CA log system
 log_system_t g_log_system = {0};
 
-#define PARSE_LOG_STR(line,STR)do{ \
-        if(memcmp(line,#STR,strlen(#STR))==0) \
-        { \
-            char *c_ptr = strtok(line,"="); \
-            c_ptr = strtok(NULL,"=");   \
-            g_log_system.STR = atoi(c_ptr); \
-            printf( YELLOW "     %s is %d \n" NONE,#STR,g_log_system.STR); \
-        }\
-}while(0);
-
 static void parse_ini(void)
 {
     FILE *log_fptr = NULL;
@@ -64,8 +54,11 @@ ErrorExit:
     return ;
 }
 
-
 int main()
 {
     parse_ini();
+
+    int i;
+    for (i=0; i <= MAX_LEVEL; i++)
+        DEBUG(i,"Now debug level is %d \n",i);
 }

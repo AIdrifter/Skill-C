@@ -19,6 +19,16 @@
 #define WHITE "\033[1;37m"
 
 #define PRO_TAG "TAG NAME"
+#define MAX_LEVEL 10
+#define PARSE_LOG_STR(line,STR)do{ \
+        if(memcmp(line,#STR,strlen(#STR))==0) \
+        { \
+            char *c_ptr = strtok(line,"="); \
+            c_ptr = strtok(NULL,"=");   \
+            g_log_system.STR = atoi(c_ptr); \
+            printf( YELLOW "     %s is %zu \n" NONE,#STR,g_log_system.STR); \
+        }\
+}while(0);
 
 //#define DEBUG_LOG_SYSTEM
 typedef struct log_system
@@ -42,27 +52,30 @@ extern log_system_t g_log_system;
 extern size_t g_log_level; // init CA or TA level in each OS
 
 
-#define debug(level,format, args...) do {\
-        if(level < g_log_level) break;\
+#define DEBUG(level, format, args...) do {\
+        if(level > g_log_level)\
+                return ;\
         \
         switch(level)\
-        case 0:\
-                printf( RED"[ERROR](%u)[%s:%d] "format NONE, level, __FUNCTION__, __LINE__, ##args);\
-                break;\
-        case 1:\
-                printf( GREEN"[INFO](%u)" format NONE,level, ##args);\
-                break;\
-        case 2:\
-                printf( YELLOW"[WARN](%u) [%s:%d] "format NONE, level,__FUNCTION__, __LINE__, ##args);\
-                break;\
-        case 3:\
-                printf( BLUE"[DEBUG](%u)[%s:%d] "format NONE, level,__FUNCTION__, __LINE__, ##args);\
-                break;\
-        case 4:\
-                printf( WHITE"[TRACE](%u)[%s:%d]" format NONE, level,__FUNCTION__, __LINE__, ##args);\
-                break;\
-        case 5:\
-                break;\
+        {\
+            case 0:\
+                    printf( RED"(%u)[ERROR][%s:%d] "format NONE, level, __FUNCTION__, __LINE__, ##args);\
+                    break;\
+            case 1:\
+                    printf( GREEN"(%u)[GREEN][%s:%d] "format NONE, level, __FUNCTION__, __LINE__, ##args);\
+                    break;\
+            case 2:\
+                    printf( YELLOW"(%u)[WARN][%s:%d] "format NONE, level,__FUNCTION__, __LINE__, ##args);\
+                    break;\
+            case 3:\
+                    printf( LIGHT_BLUE"(%u)[DEBUG][%s:%d] "format NONE, level,__FUNCTION__, __LINE__, ##args);\
+                    break;\
+            case 4:\
+                    printf( WHITE"(%u)[TRACE][%s:%d]" format NONE, level,__FUNCTION__, __LINE__, ##args);\
+                    break;\
+            case 5:\
+                    break;\
+        }\
 }while(0)
 
 #define BEGIN() if(g_log_system.FUNCTION_IN_OUT) printf(PRO_TAG "ENTER %s() \n ",__func__)
