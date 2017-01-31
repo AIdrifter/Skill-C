@@ -38,7 +38,8 @@ call vundle#begin()
 
 " bookmark
 Plugin 'MattesGroeger/vim-bookmarks'
-Plugin 'vasconcelloslf/vim-interestingwords' " hight light key word
+Plugin 'MultipleSearch' " hight light key word
+"Plugin 'vasconcelloslf/vim-interestingwords' " hight light key word
 Plugin 'airblade/vim-gitgutter'
 
 " Airline
@@ -101,7 +102,7 @@ let g:airline_powerline_fonts = 1
 " 開啟tabline
 let g:airline#extensions#tabline#enabled = 1
 " tabline中當前buffer兩端的分隔字符
-let g:airline#extensions#tabline#left_sep = ' '
+ let g:airline#extensions#tabline#left_sep = ' '
 " tabline中未激活buffer兩端的分隔字符
 let g:airline#extensions#tabline#left_alt_sep = '|'
 " tabline中buffer顯示編號
@@ -141,7 +142,6 @@ endfunction
 nnoremap <Leader>s :call ToggleErrors()<cr>
 " nnoremap <Leader>sn :lnext<cr>
 " nnoremap <Leader>sp :lprevious<cr>
-
 
 
 
@@ -231,7 +231,7 @@ let g:ctrlp_follow_symlinks=1
 "   b. function
 map <F2> :CtrlPFunky<cr>
 let g:ctrlp_extensions = ['funky']
-let g:ctrlp_funky_syntax_highlight = 1 
+let g:ctrlp_funky_syntax_highlight = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  nmap other hot key                                    "
@@ -240,6 +240,43 @@ let g:ctrlp_funky_syntax_highlight = 1
 nmap rs :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))<CR>
 nmap nu :set nu<CR>
 nmap nonu :set nonu<CR>
+
+
+"
+" 8.multiple Search
+"
+
+"" Thanks to Manuel Picaza for the following mapping to :Search the word under
+"" the cursor.
+"nnoremap <silent> <Leader>* :Search
+"
+"" Following Manuel's idea, adapt the former 'Super Star' tip from vim.org to work with
+"" :Search on a visual selection.
+"vnoremap <silent> <Leader>*:Search
+"
+"" Set the current search pattern to the next one in the list
+"nnoremap <silent> <Leader>n:Search
+"
+"" Set the current search pattern to the previous one in the list
+"nnoremap <silent> <Leader>N:Search
+"vnoremap <silent> <Leader>* y:call Search(0,'\V'.substitute(escape(@@,"\\/\"'"),"\n",'\\n','ge'))<CR>
+vnoremap <silent> <Leader>* y:execute ':Search \V<C-R>=substitute(escape(@@,"/\\"),"\n","\\\\n","ge")<CR>'<CR>
+
+
+
+"let s:interestingWordsGUIColors = ['#aeee00', '#ff0000', '#0000ff', '#b88823', '#ffa724', '#ff2c4b']
+"let s:interestingWordsTermColors = ['154', '121', '211', '137', '214', '222']
+
+"  Specifes a maximum number of colors to use.
+let g:MultipleSearchMaxColors = 8          " (Default: 8)
+
+" (Default: "red,yellow,blue,green,magenta,cyan,gray,brown")
+let g:MultipleSearchColorSequence =  "154,121,211,137,214,222,100,200"
+
+" (Default: "white,black,white,black,white,black,black,white")
+let g:MultipleSearchTextColorSequence = "black,black,black,black,black,black,black,black"
+
+
 
 " paste
 set paste
@@ -283,9 +320,7 @@ highlight ExtraWhitespace ctermbg=darkred guibg=darkcyan
 autocmd BufEnter * if &ft != 'help' | match ExtraWhitespace /\s\+$/ | endif
 autocmd BufEnter * if &ft == 'help' | match none /\s\+$/ | endif
 
-
-
-hi CursorLine   cterm=NONE ctermbg=235 ctermfg=NONE
+hi CursorLine   cterm=NONE ctermbg=237 ctermfg=NONE
 hi CursorColumn   cterm=NONE ctermbg=242 ctermfg=NONE
 set cursorcolumn
 set cursorline
@@ -296,4 +331,3 @@ highlight Foo ctermbg=16 guibg=#000000
 syntax region Foo start=/^\s*#ifdef.*_DEBUG/ end=/^\s*#endif/
 
 set nonu
-
