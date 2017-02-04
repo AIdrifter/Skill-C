@@ -1091,15 +1091,24 @@ extern char *stpncpy (char *__restrict __dest,
 # 644 "/usr/include/string.h" 3 4
 
 # 7 "weak.c" 2
-# 28 "weak.c"
-void fun_c() __attribute__ ((weak,alias ("__fun_c")));void __fun_c(){ printf("WEAK_FUN is not implemented in optee\n");};
 
 
 
-
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdbool.h" 1 3 4
+# 11 "weak.c" 2
+# 31 "weak.c"
+extern void fun_c(void) __attribute__ ((weak,alias ("__fun_c")));void __fun_c(void){ printf("fun_c" "  is not implemented in optee\n");};
+extern void TEE_SetICTStatus(int *a,int *b) __attribute__ ((weak,alias ("__TEE_SetICTStatus")));void __TEE_SetICTStatus(int *a,int *b){ printf("TEE_SetICTStatus" "  is not implemented in optee\n");};
+extern void fun_b(void) __attribute__ ((weak,alias ("__fun_b")));void __fun_b(void){ printf("fun_b" "  is not implemented in optee\n");};
+extern void* memcpy(void *__restrict __dest, const void *__restrict __src,size_t _n) __attribute__ ((weak,alias ("__memcpy")));void* __memcpy(void *__restrict __dest, const void *__restrict __src,size_t _n){ printf("memcpy" "  is not implemented in optee\n");};
+extern int printf() __attribute__ ((weak,alias ("__printf")));int __printf(){ printf("printf" "  is not implemented in optee\n");};
+# 51 "weak.c"
 int main(void)
 {
-    printf( "\033[1;37m""[TRACE][%s:%d]" "1234" "\033[m", __FUNCTION__, 35);
+  char buff[100];
+  memcpy(buff,"12345",5);
+  printf( "\033[1;37m""[TRACE][%s:%d]" "[1234]\n" "\033[m", __FUNCTION__, 55);
+  fun_b();
   fun_c();
   printf("it is test\n");
   return 0;
