@@ -1,3 +1,7 @@
+# C operator priority
+http://en.cppreference.com/w/c/language/operator_precedence
+
+# gdb result
 $31 = (struct node *) 0x200d070
 (gdb) p (*indirect)->next->next->next->next
 $32 = (struct node *) 0x200d090
